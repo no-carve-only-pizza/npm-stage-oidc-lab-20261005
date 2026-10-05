@@ -1,4 +1,4 @@
-name: OIDC stage-only direct publish check
+name: OIDC stage-only staging check
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ permissions:
   id-token: write
 
 jobs:
-  direct-publish:
+  stage-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -18,4 +18,4 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
       - run: npm install --global npm@12.2.0 --ignore-scripts
-      - run: npm publish --access public --tag stage-probe
+      - run: npm stage publish --access public --tag stage-probe
