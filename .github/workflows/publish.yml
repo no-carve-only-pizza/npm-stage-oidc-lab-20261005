@@ -1,19 +1,14 @@
-name: OIDC stage approval boundary check
+name: OIDC staged version immutability check
 
 on:
   workflow_dispatch:
-    inputs:
-      stage_id:
-        description: Owned synthetic stage UUID
-        required: true
-        type: string
 
 permissions:
   contents: read
   id-token: write
 
 jobs:
-  approve-check:
+  stage-variant:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -22,6 +17,5 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
-      - run: node scripts/check-stage-approve.mjs
-        env:
-          STAGE_ID: ${{ inputs.stage_id }}
+      - run: npm install --global npm@12.2.0 --ignore-scripts
+      - run: npm stage publish --access public --tag latest --force
