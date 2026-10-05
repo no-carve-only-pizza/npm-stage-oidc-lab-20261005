@@ -1,14 +1,19 @@
-name: OIDC restricted dist-tag check
+name: OIDC stage approval boundary check
 
 on:
   workflow_dispatch:
+    inputs:
+      stage_id:
+        description: Owned synthetic stage UUID
+        required: true
+        type: string
 
 permissions:
   contents: read
   id-token: write
 
 jobs:
-  dist-tag:
+  approve-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -17,5 +22,6 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
-      - run: npm install --global npm@12.2.0 --ignore-scripts
-      - run: npm dist-tag add @dohyunpkr/stage-publish-example@0.0.1 stage-oidc-probe
+      - run: node scripts/check-stage-approve.mjs
+        env:
+          STAGE_ID: ${{ inputs.stage_id }}
