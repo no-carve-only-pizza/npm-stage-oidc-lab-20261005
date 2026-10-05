@@ -1,0 +1,14 @@
+{
+  "name": "@dohyunpkr/stage-publish-example",
+  "version": "0.0.2",
+  "description": "Disposable synthetic fixture for authorized npm registry permission research",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
