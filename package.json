@@ -2,6 +2,10 @@
   "name": "@dohyunpkr/stage-publish-example",
   "version": "0.0.2",
   "description": "Disposable synthetic fixture for authorized npm registry permission research",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/no-carve-only-pizza/npm-stage-oidc-lab-20261005"
+  },
   "main": "index.js",
   "license": "UNLICENSED",
   "files": [
